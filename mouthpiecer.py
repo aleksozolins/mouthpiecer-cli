@@ -1,8 +1,15 @@
+import os
+import requests
+import json
+
+
 def mainmenu():
     print("[1] Add a mouthpiece")
-    print("[2] Delete a mouthpiece")
+    print("[2] List my mouthpieces")
+    print("[3] Delete a mouthpiece")
     print("[0] Exit to shell")
-
+    print()
+    
 
 def mpctypemenu():
     print()
@@ -12,7 +19,8 @@ def mpctypemenu():
     print("Rim")
     print("Cup (No Shank)")
     print("Shank Only")
-
+    print()
+    
 
 def mpcfinishmenu():
     print()
@@ -21,7 +29,8 @@ def mpcfinishmenu():
     print("Brass (Bare)")
     print("Nickel (Bare)")
     print("Stainless Steel")
-
+    print()
+    
 
 def addmpc():
     newmfr = str(input("Manufacturer: "))
@@ -34,8 +43,6 @@ def addmpc():
     newfinish = str(input("Finish: "))
     print()
     input("Press Enter to send to Knack...")
-    import requests
-    import json
     api_url = "https://api.knack.com/v1/objects/object_4/records"
     mouthpiece = {"field_17": newmfr, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
     headers =  {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
@@ -43,6 +50,29 @@ def addmpc():
     print(response.json())
     print(response.status_code)
 
+
+def listmpcs():
+    api_url = "https://api.knack.com/v1/objects/object_4/records"
+    headers =  {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+    response = requests.get(api_url, headers=headers)
+    jresponse = response.json()
+    print(json.dumps(jresponse, indent=4, sort_keys=True))
+
+
+def delmpc():
+    delid = input("Enter ID of mouthpiece to delete: ")
+    api_url = "https://api.knack.com/v1/objects/object_4/records/" + delid
+    headers =  {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+    response = requests.delete(api_url, headers=headers)
+    print(response.json())
+    print(response.status_code)
+
+
+os.system('clear')
+
+bannerfile = open('banner.txt', 'r')
+banner = bannerfile.read()
+print(banner)
 
 mainmenu()
 option = int(input("Enter your choice: "))
@@ -53,7 +83,10 @@ while option != 0:
         addmpc()
     elif option == 2:
         print()
-        print("Delete a mouthpiece selected")
+        listmpcs()
+    elif option == 3:
+        print()
+        delmpc()
     else:
         print()
         print("Invalid option selected")
