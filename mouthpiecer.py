@@ -10,9 +10,8 @@ def login():
     print()
     print("Please log in...")
     print()
-    logemail  = input("Email: ")
+    logemail = input("Email: ")
     passwd = getpass.getpass("Password: ")
-    #passwd = input("Password: ")
     api_url = "https://api.knack.com/v1/applications/60241522a16be4001b611249/session"
     creds = {"email": logemail, "password": passwd}
     headers = {"content-type":"application/json", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
@@ -58,11 +57,10 @@ def mpcfinishmenu():
 # Add mouthpiece process
 def addmpc():
     newmfr = str(input("Manufacturer: "))
-    mpctypemenu()
-    newtype = str(input("Mouthpiece type: "))
     print()
     newmodel = str(input("Model: "))
-    print()
+    mpctypemenu()
+    newtype = str(input("Mouthpiece type: "))
     mpcfinishmenu()
     newfinish = str(input("Finish: "))
     print()
