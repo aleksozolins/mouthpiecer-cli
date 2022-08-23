@@ -35,23 +35,23 @@ def mainmenu():
 # Menu for selecting a mouthpiece type
 def mpctypemenu():
     print()
-    print("One Piece")
-    print("Underpart")
-    print("Two Piece")
-    print("Rim")
-    print("Cup (No Shank)")
-    print("Shank Only")
+    print("one-piece")
+    print("two-piece")
+    print("cup")
+    print("rim")
     print()
 
 
 # Menu for selecting a mouthpiece finish
 def mpcfinishmenu():
     print()
-    print("Silver Plated")
-    print("Gold Plated")
-    print("Brass (Bare)")
-    print("Nickel (Bare)")
-    print("Stainless Steel")
+    print("silver plated")
+    print("gold plated")
+    print("brass")
+    print("nickel")
+    print("stainless")
+    print("bronze")
+    print("plastic")
     print()
 
 
