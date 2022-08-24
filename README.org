@@ -1,0 +1,19 @@
+#+title: mouthpiecer-cli
+
+* About
+
+**mouthpiecer-cli** is a Python based command line interface to a [[https://www.knack.com][Knack]] database back end.
+
+The Mouthpiecer Knack front end can be found here: [[https://aleksozolins.knack.com/mouthpiecer#home/]]
+
+- The app is meant for individual users to manage their French Horn mouthpiece collection (really).
+- Users can also view the collections of other "mouthpiecers" and can arrange mouthpiece trades as well.
+- For now, some features have been removed from the front end and will be re-introduced as the cli develops.
+
+Ultimately, the cli should exactly mirror the feature-set of the web front end.
+
+** Todos
+
+*** TODO Do not allow mouthpiece operation if not logged in
+*** TODO Add log out option
+*** TODO View based calls (as opposed to object based calls) once logged in

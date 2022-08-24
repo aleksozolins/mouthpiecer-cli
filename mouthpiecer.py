@@ -1,5 +1,3 @@
-# TODOS: 1) Do not allow mouthpiece operation if not logged in. 2) Add log out option. 3) View based calls once logged in.
-
 # Import needed modules
 import os              # for clearing the screen and other OS level commands
 import requests        # for communicating via API
