@@ -2,7 +2,7 @@
 
 * About
 
-**mouthpiecer-cli** is a Python based command line interface to a [[https://www.knack.com][Knack]] database back end.
+*mouthpiecer-cli* is a Python based command line interface to a [[https://www.knack.com][Knack]] database back end.
 
 The Mouthpiecer Knack front end can be found here: [[https://aleksozolins.knack.com/mouthpiecer#home/]]
 
@@ -14,6 +14,6 @@ Ultimately, the cli should exactly mirror the feature-set of the web front end.
 
 ** Todos
 
-*** TODO Do not allow mouthpiece operation if not logged in
-*** TODO Add log out option
-*** TODO View based calls (as opposed to object based calls) once logged in
+- [ ] Do not allow mouthpiece operation if not logged in
+- [ ] Add log out option
+- [ ] View based calls (as opposed to object based calls) once logged in
