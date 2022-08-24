@@ -14,6 +14,10 @@ Ultimately, the cli should exactly mirror the feature-set of the web front end.
 
 ** Todos
 
-- [ ] Do not allow mouthpiece operation if not logged in
-- [ ] Add log out option
 - [ ] View based calls (as opposed to object based calls) once logged in
+- [ ] Error handling
+- [ ] Format incoming JSON into table (list mouthpieces)
+- [ ] Assign connection to mouthpiecer when adding mouthpiece
+- [X] Add log out option
+- [X] Do not allow mouthpiece operation if not logged in
+- [X] Logged in indicator (you are logged in as...)
