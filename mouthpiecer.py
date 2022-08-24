@@ -25,7 +25,6 @@ def login():
     token = jresponse['session']['user']['token']
     print()
     input("You have been logged in. Press Enter...")
-    os.system('clear')
 
 
 # Logout process
@@ -33,15 +32,14 @@ def logout():
     global token
     if token == "":
         input("You aren't currently logged in. Press Enter...")
-        os.system('clear')
     else:
         input("You will be logged out. Press Enter...")
         token = ""
-        os.system('clear')
 
 
 # Our Main Menu
 def mainmenu():
+    os.system('clear')
     if token == "":
         print()
         print("You are not currently logged in...")
@@ -89,7 +87,6 @@ def mpcfinishmenu():
 def addmpc():
     if token == "":
         input("Please log in first. Press Enter...")
-        os.system('clear')
     else:
         newmfr = str(input("Manufacturer: "))
         print()
@@ -100,9 +97,9 @@ def addmpc():
         newfinish = str(input("Finish: "))
         print()
         input("Press Enter to send to Knack...")
-        api_url = "https://api.knack.com/v1/objects/object_4/records"
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
         mouthpiece = {"field_17": newmfr, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
-        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.post(api_url, data=json.dumps(mouthpiece), headers=headers)
         print(response.json())
         print(response.status_code)
@@ -112,13 +109,13 @@ def addmpc():
 def listmpcs():
     if token == "":
         input("Please log in first. Press Enter...")
-        os.system('clear')
     else:
-        api_url = "https://api.knack.com/v1/objects/object_4/records"
-        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.get(api_url, headers=headers)
         jresponse = response.json()
         print(json.dumps(jresponse, indent=4, sort_keys=True))
+        input("Press Enter to continue...")
 
 
 # Delete mouthpiece process
@@ -140,7 +137,6 @@ def delmpc():
 def addusr():
     if token != "":
         input("Please log out before adding a user. Press Enter...")
-        os.system('clear')
     else:
         newusrfname = str(input("First name: "))
         print()
