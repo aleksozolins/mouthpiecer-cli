@@ -9,6 +9,7 @@ token = ""
 bannerfile = open('banner.txt', 'r')
 banner = bannerfile.read()
 
+
 # Login process
 def login():
     global token
@@ -171,8 +172,6 @@ def rusr():
 
 
 # Here's where the program runs
-os.system('clear')
-print()
 mainmenu()
 option = int(input("Enter your choice: "))
 
