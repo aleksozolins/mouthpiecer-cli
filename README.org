@@ -12,11 +12,18 @@ The Mouthpiecer Knack front end can be found here: [[https://aleksozolins.knack.
 
 Ultimately, the cli should exactly mirror the feature-set of the web front end.
 
-** Todos
+* Dependencies
 
+For now, any dependencies have to be install manually with =pip=.
+
+- [[https://pandas.pydata.org/][pandas - Python Data Analisys Library]]
+
+* Todos
+
+- [ ] Colored output
 - [X] View based calls (as opposed to object based calls) once logged in
 - [ ] Error handling
-- [ ] Format incoming JSON into table (list mouthpieces)
+- [X] Format incoming JSON into table (list mouthpieces)
 - [ ] Assign connection to mouthpiecer when adding mouthpiece
 - [X] Add log out option
 - [X] Do not allow mouthpiece operation if not logged in

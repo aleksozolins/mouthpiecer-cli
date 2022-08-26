@@ -3,6 +3,7 @@ import os              # for clearing the screen and other OS level commands
 import requests        # for communicating via API
 import json            # for handling JSON
 import getpass         # provides a password input without revealing text
+import pandas as pd    # for tabulating JSON
 
 # declare some vars
 token = ""
@@ -115,7 +116,12 @@ def listmpcs():
         headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.get(api_url, headers=headers)
         jresponse = response.json()
-        print(json.dumps(jresponse, indent=4, sort_keys=True))
+        # print(json.dumps(jresponse, indent=4, sort_keys=True))
+        # input("Press Enter to continue...")
+        df = pd.json_normalize(jresponse['records'])
+        df.drop(df.columns[[0, 2, 4, 6, 8]], axis=1, inplace=True)
+        df.columns = ['Make', 'Model', 'Type', 'Finish']
+        print(df)
         input("Press Enter to continue...")
 
 
