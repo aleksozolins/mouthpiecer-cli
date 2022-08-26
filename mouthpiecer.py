@@ -1,9 +1,10 @@
 # Import needed modules
-import os              # for clearing the screen and other OS level commands
-import requests        # for communicating via API
-import json            # for handling JSON
-import getpass         # provides a password input without revealing text
-import pandas as pd    # for tabulating JSON
+import os                         # for clearing the screen and other OS level commands
+import requests                   # for communicating via API
+import json                       # for handling JSON
+import getpass                    # provides a password input without revealing text
+import pandas as pd               # for tabulating JSON
+from termcolor import colored     # colored output in the terminal
 
 # declare some vars
 token = ""
@@ -48,7 +49,7 @@ def mainmenu():
     else:
         print()
         print("You are logged in as " + logemail)
-    print(banner)
+    print(colored(banner, 'yellow'))
     print("[1] Add a mouthpiece")
     print("[2] List my mouthpieces")
     print("[3] Delete a mouthpiece")

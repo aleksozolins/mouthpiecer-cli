@@ -17,6 +17,7 @@ Ultimately, the cli should exactly mirror the feature-set of the web front end.
 For now, any dependencies have to be install manually with =pip=.
 
 - [[https://pandas.pydata.org/][pandas - Python Data Analisys Library]]
+- termcolor
 
 * Todos
 
