@@ -118,6 +118,7 @@ def listmpcs():
         jresponse = response.json()
         # print(json.dumps(jresponse, indent=4, sort_keys=True))
         # input("Press Enter to continue...")
+        pd.set_option('display.max_rows', None)
         df = pd.json_normalize(jresponse['records'])
         df.drop(df.columns[[0, 2, 4, 6, 8]], axis=1, inplace=True)
         df.columns = ['Make', 'Model', 'Type', 'Finish']
