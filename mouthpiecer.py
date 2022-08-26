@@ -123,14 +123,14 @@ def listmpcs():
 def delmpc():
     if token == "":
         input("Please log in first. Press Enter...")
-        os.system('clear')
     else:
         delid = input("Enter ID of mouthpiece to delete: ")
-        api_url = "https://api.knack.com/v1/objects/object_4/records/" + delid
-        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.delete(api_url, headers=headers)
         print(response.json())
         print(response.status_code)
+        input("Press Enter to continue...")
 
 
 # Add user process
