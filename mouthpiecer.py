@@ -121,11 +121,13 @@ def listmpcs():
         # input("Press Enter to continue...")
         pd.set_option('display.max_rows', None)
         df = pd.json_normalize(jresponse['records'])
-        df.drop(df.columns[[0, 2, 4, 6, 8]], axis=1, inplace=True)
-        df.columns = ['Make', 'Model', 'Type', 'Finish']
+        df.drop(df.columns[[2, 4, 6, 8]], axis=1, inplace=True)
+        df.columns = ['id', 'Make', 'Model', 'Type', 'Finish']
         print(df)
+        selection = int(input("Select a mouthpiece by number: "))
+        dfs = df.iloc[selection]['id']
+        print(dfs)
         input("Press Enter to continue...")
-
 
 # Delete mouthpiece process
 def delmpc():

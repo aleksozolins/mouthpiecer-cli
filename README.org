@@ -21,7 +21,7 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Todos
 
-- [ ] Colored output
+- [X] Colored output
 - [X] View based calls (as opposed to object based calls) once logged in
 - [ ] Error handling
 - [X] Format incoming JSON into table (list mouthpieces)
