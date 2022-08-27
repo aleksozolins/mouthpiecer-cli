@@ -10,6 +10,7 @@ from termcolor import colored     # colored output in the terminal
 token = ""
 bannerfile = open('banner.txt', 'r')
 banner = bannerfile.read()
+mpcselect = 0
 
 
 # Uesful code
@@ -56,31 +57,47 @@ def mainmenu():
     if token == "":
         print()
         print("You are not currently logged in...")
+        print(colored(banner, 'yellow'))
+        print("[1] My Mouthpieces")
+        print("-----------------------")
+        print(colored("[6] ", 'green') + ("Log in"))
+        print("[7] Log out")
+        print(colored("[8] ", 'green') + ("Add a user"))
+        print("-----------------------")
+        print(colored("[0] ", 'green') + ("Exit to shell"))
+        print()
     else:
         print()
         print("You are logged in as " + logemail)
-    print(colored(banner, 'yellow'))
-    print("[1] My Mouthpieces")
-    print("-----------------------")
-    print("[6] Log in")
-    print("[7] Log out")
-    print("[8] Add a user")
-    print("-----------------------")
-    print("[0] Exit to shell")
-    print()
+        print(colored(banner, 'yellow'))
+        print(colored("[1] ", 'green') + ("My Mouthpieces"))
+        print("-----------------------")
+        print("[6] Log in")
+        print(colored("[7] ", 'green') + ("Log out"))
+        print(colored("[8] ", 'green') + ("Add a user"))
+        print("-----------------------")
+        print(colored("[0] ", 'green') + ("Exit to shell"))
+        print()
 
 
 # My Mouthpieces Menu
 def mympcsmenu():
+    global mpcselect
     os.system('clear')
     print()
     print(colored(banner, 'yellow'))
     print("--- Mouthpieces for " + logemail + " ---")
     print()
-    print("[1] Add mouthpiece               [3] Edit mouthpiece")
-    print("[2] Delete mouthpiece            [0] Back to main menu")
-    print("------------------------------------------------------")
-    print()
+    if mpcselect == 0:
+        print(colored("[1] ", 'green') + ("Add mouthpiece               ") + (colored("[3] ", 'green') + ("Edit mouthpiece")))
+        print(colored("[2] ", 'green') + ("Delete mouthpiece            ") + (colored("[0] ", 'green') + ("Back to main menu")))
+        print("------------------------------------------------------")
+        print()
+    if mpcselect == 1:
+        print("[1] Add mouthpiece               [3] Edit mouthpiece")
+        print("[2] Delete mouthpiece            [0] Back to main menu")
+        print("------------------------------------------------------")
+        print()
 
 
 # Menu for selecting a mouthpiece type
@@ -133,16 +150,7 @@ def mympcs():
         input("Please log in first. Press Enter...")
     else:
         mympcsmenu()
-        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
-        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
-        response = requests.get(api_url, headers=headers)
-        jresponse = response.json()
-        pd.set_option('display.max_rows', None)
-        df = pd.json_normalize(jresponse['records'])
-        df.drop(df.columns[[2, 4, 6, 8]], axis=1, inplace=True)
-        df.columns = ['id', 'Make', 'Model', 'Type', 'Finish']
-        print(df)
-        print()
+        listmpcs()
         selection = int(input("Make a menu selection: "))
         if selection == 1:
             addmpc()
@@ -158,10 +166,30 @@ def mympcs():
             mympcs()
 
 
+# List mouthpieces process
+def listmpcs():
+    global mpcselect
+    api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
+    headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
+    response = requests.get(api_url, headers=headers)
+    jresponse = response.json()
+    pd.set_option('display.max_rows', None)
+    df = pd.json_normalize(jresponse['records'])
+    df.drop(df.columns[[2, 4, 6, 8]], axis=1, inplace=True)
+    df.columns = ['id', 'Make', 'Model', 'Type', 'Finish']
+    print(df)
+    print()
+
+
 # Delete mouthpiece process
 def delmpc():
+    global mpcselect
+    mpcselect = 1
+    mympcsmenu()
+    listmpcs()
+    print("Make a menu selection: 2")
     print()
-    selection = int(input("Select a mouthpiece by number: "))
+    selection = int(input("Select a mouthpiece to delete: "))
     delid = df.iloc[selection]['id']
     api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
     headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
