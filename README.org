@@ -21,6 +21,7 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Todos
 
+- [ ] Move project to org using babel
 - [X] Colored output
 - [X] View based calls (as opposed to object based calls) once logged in
 - [ ] Error handling
