@@ -14,11 +14,14 @@ mpcselect = 0
 
 
 # Uesful code
+# 1
 # selection = int(input("Select a mouthpiece by number: "))
 # dfs = df.iloc[selection]['id']
 # print(dfs)
 # input("Press Enter to continue...")
 
+# 2
+# print(response.status_code)
 
 # Login process
 def login():
@@ -125,7 +128,8 @@ def mpcfinishmenu():
 
 # Add mouthpiece process
 def addmpc():
-    newmfr = str(input("Manufacturer: "))
+    print()
+    newmfr = str(input("Make: "))
     print()
     newmodel = str(input("Model: "))
     mpctypemenu()
@@ -133,14 +137,26 @@ def addmpc():
     mpcfinishmenu()
     newfinish = str(input("Finish: "))
     print()
-    input("Press Enter to send to Knack...")
-    api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
-    mouthpiece = {"field_17": newmfr, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
-    headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
-    response = requests.post(api_url, data=json.dumps(mouthpiece), headers=headers)
-    mympcs()
-    # print(response.json())
-    # print(response.status_code)
+    print(("Make: ") + colored(newmfr, 'green'))
+    print(("Model: ") + colored(newmodel, 'green'))
+    print(("Type: ") + colored(newtype, 'green'))
+    print(("Finish: ") + colored(newfinish, 'green'))
+    print("------------------------")
+    print()
+    conf = input("Send to Knack? " + colored("[y] [n]: ", 'green'))
+    if conf == "y":
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
+        mouthpiece = {"field_17": newmfr, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
+        response = requests.post(api_url, data=json.dumps(mouthpiece), headers=headers)
+        print()
+        if response.status_code == 200:
+            input("Success! Press Enter to continue...")
+        else:
+            input("Error! There was a problem with your request. Press Enter to continue...")
+        mympcs()
+    else:
+        mympcs()
 
 
 # My mouthpieces process
@@ -198,14 +214,23 @@ def delmpc():
     print("Make a menu selection: 2")
     print()
     selection = int(input("Select a mouthpiece by Index to delete: "))
-    delid = df.iloc[selection]['id']
-    api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
-    headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
-    response = requests.delete(api_url, headers=headers)
     print()
-    input("Mouthpiece deleted...")
-    mpcselect = 0
-    mympcs()
+    conf = input(colored("Are you sure you want to delete this mouthpiece? ", 'red') + colored("[y] [n]: ", 'green'))
+    if conf == "y":
+        delid = df.iloc[selection]['id']
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
+        response = requests.delete(api_url, headers=headers)
+        print()
+        if response.status_code == 200:
+            input("Success! Press Enter to continue...")
+        else:
+            input("Error! There was a problem with your request. Press Enter to continue...")
+        mpcselect = 0
+        mympcs()
+    else:
+        mpcselect = 0
+        mympcs()
 
 
 # Add user process
