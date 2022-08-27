@@ -175,10 +175,18 @@ def listmpcs():
     jresponse = response.json()
     pd.set_option('display.max_rows', None)
     df = pd.json_normalize(jresponse['records'])
+    df['index1'] = df.index
     df.drop(df.columns[[2, 4, 6, 8]], axis=1, inplace=True)
-    df.columns = ['id', 'Make', 'Model', 'Type', 'Finish']
-    print(df)
-    print()
+    df.columns = ['id', 'Make', 'Model', 'Type', 'Finish', 'Index']
+    df = df.reindex(columns=['Index', 'Make', 'Model', 'Type', 'Finish', 'id'])
+    if mpcselect == 0:
+        df2 = df.to_string(index=False)
+        print(df2)
+        print()
+    elif mpcselect -- 1:
+        df2 = colored(df.to_string(index=False), 'green')
+        print(df2)
+        print()
 
 
 # Delete mouthpiece process
@@ -189,7 +197,7 @@ def delmpc():
     listmpcs()
     print("Make a menu selection: 2")
     print()
-    selection = int(input("Select a mouthpiece to delete: "))
+    selection = int(input("Select a mouthpiece by Index to delete: "))
     delid = df.iloc[selection]['id']
     api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
     headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
