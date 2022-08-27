@@ -22,11 +22,11 @@ For now, any dependencies have to be install manually with =pip=.
 * Todos
 
 - [ ] Move project to org using babel
-- [ ] Add confirm prompts to operations
+- [X] Add confirm prompts to operations
 - [ ] Edit mouthpiece operation
 - [ ] Pagination
 - [ ] Normalize spacing of all operations
-- [ ] Spruce up the interface with more color
+- [X] Spruce up the interface with more color
 - [ ] Add all fields to My Mouthpieces view
 - [ ] Conditional input for thread type etc.
 - [X] Colored output

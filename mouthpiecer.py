@@ -39,9 +39,13 @@ def login():
         headers = {"content-type":"application/json", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
         response = requests.post(api_url, data=json.dumps(creds), headers=headers)
         jresponse = response.json()
-        token = jresponse['session']['user']['token']
-        print()
-        input("You have been logged in. Press Enter...")
+        if response.status_code == 200:
+            token = jresponse['session']['user']['token']
+            print()
+            input("You have been logged in. Press Enter to continue...")
+        else:
+            print()
+            input(colored("Invalid credentials. ", 'red') + "Press Enter to continue...")
 
 
 # Logout process
