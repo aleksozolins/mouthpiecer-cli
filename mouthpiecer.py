@@ -74,7 +74,7 @@ def mainmenu():
         print("-----------------------")
         print("[6] Log in")
         print(colored("[7] ", 'green') + ("Log out"))
-        print(colored("[8] ", 'green') + ("Add a user"))
+        print("[8] Add a user")
         print("-----------------------")
         print(colored("[0] ", 'green') + ("Exit to shell"))
         print()
@@ -168,7 +168,7 @@ def mympcs():
 
 # List mouthpieces process
 def listmpcs():
-    global mpcselect
+    global df
     api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
     headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
     response = requests.get(api_url, headers=headers)
@@ -183,7 +183,7 @@ def listmpcs():
         df2 = df.to_string(index=False)
         print(df2)
         print()
-    elif mpcselect -- 1:
+    elif mpcselect == 1:
         df2 = colored(df.to_string(index=False), 'green')
         print(df2)
         print()
@@ -204,6 +204,7 @@ def delmpc():
     response = requests.delete(api_url, headers=headers)
     print()
     input("Mouthpiece deleted...")
+    mpcselect = 0
     mympcs()
 
 
