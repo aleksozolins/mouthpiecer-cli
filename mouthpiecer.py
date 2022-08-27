@@ -237,6 +237,13 @@ def delmpc():
         mympcs()
 
 
+# Edit mouthpiece process
+def editmpc():
+    print()
+    input("Not yet! Press Enter to continue...")
+    mympcs()
+
+
 # Add user process
 # NOTE: Adding the connected Mouthpiecer in field_40 does not yet work. We may need to retrieve the ID of the new account and then add that value with an additional call.
 def addusr():
