@@ -22,6 +22,7 @@ For now, any dependencies have to be install manually with =pip=.
 * Todos
 
 - [ ] Move project to org using babel
+- [ ] Problem listing mouthpieces when there are none
 - [X] Add confirm prompts to operations
 - [ ] Edit mouthpiece operation
 - [ ] Pagination
