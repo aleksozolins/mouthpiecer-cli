@@ -21,7 +21,7 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Known issues
 
-- When selecting a mouthpiece to delete, if an integer is not entered, the program will terminate with an error.
+- When selecting a mouthpiece to delete, if an invalid selection is made, the program will terminate with an error.
 - While adding a mouthpiece, if you enter an invalid menu selection for type, threads, or finish, and then press "0" at the "My mouthpieces" menu, something strange happens.
 
 * Todos

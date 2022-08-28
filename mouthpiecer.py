@@ -103,6 +103,7 @@ def mympcsmenu():
     global mpcselect
     os.system('clear')
     print()
+    print("You are logged in as " + logemail)
     print(colored(banner, 'yellow'))
     print("--- Mouthpieces for " + logemail + " ---")
     print()
