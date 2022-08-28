@@ -128,6 +128,16 @@ def mpctypemenu():
     print()
 
 
+# Menu for selecting mouthpiece threads
+def mpcthreadsmenu():
+    print()
+    print(colored("LEAVE BLANK FOR ONE-PIECE", 'red'))
+    print(colored("[1] ", 'green') + ("standard"))
+    print(colored("[2] ", 'green') + ("metric"))
+    print(colored("[3] ", 'green') + ("other"))
+    print()
+
+
 # Menu for selecting a mouthpiece finish
 def mpcfinishmenu():
     print()
@@ -161,6 +171,18 @@ def addmpc():
         print()
         input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
         mympcs()
+    mpcthreadsmenu()
+    option = int(input("Threads: "))
+    if option == 1:
+        newthreads = "standard"
+    elif option == 2:
+        newthreads = "metric"
+    elif option == 3:
+        newthreads = "other"
+    else:
+        print()
+        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
+        mympcs()
     mpcfinishmenu()
     option = int(input("Finish: "))
     if option == 1:
@@ -185,13 +207,14 @@ def addmpc():
     print(("Make: ") + colored(newmake, 'green'))
     print(("Model: ") + colored(newmodel, 'green'))
     print(("Type: ") + colored(newtype, 'green'))
+    print(("Threads: ") + colored(newthreads, 'green'))
     print(("Finish: ") + colored(newfinish, 'green'))
     print("------------------------")
     print()
     conf = input("Send to Knack? " + colored("[y] [n]: ", 'green'))
     if conf == "y":
         api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
-        mouthpiece = {"field_17": newmake, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
+        mouthpiece = {"field_17": newmake, "field_24": newtype, "field_16": newmodel, "field_25": newthreads, "field_26": newfinish}
         headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.post(api_url, data=json.dumps(mouthpiece), headers=headers)
         print()
@@ -275,6 +298,8 @@ def delmpc():
             print()
             if response.status_code == 200:
                 input("Success! Press Enter to continue...")
+                mpcselect = 0
+                mympcs()
             else:
                 input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
                 mpcselect = 0
