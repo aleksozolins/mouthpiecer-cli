@@ -131,7 +131,6 @@ def mpctypemenu():
 # Menu for selecting mouthpiece threads
 def mpcthreadsmenu():
     print()
-    print(colored("LEAVE BLANK FOR ONE-PIECE", 'red'))
     print(colored("[1] ", 'green') + ("standard"))
     print(colored("[2] ", 'green') + ("metric"))
     print(colored("[3] ", 'green') + ("other"))
@@ -171,20 +170,22 @@ def addmpc():
         print()
         input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
         mympcs()
-    mpcthreadsmenu()
-    option = input("Threads: ")
-    if option == "1":
-        newthreads = "standard"
-    elif option == "2":
-        newthreads = "metric"
-    elif option == "3":
-        newthreads = "other"
-    elif option == "":
-        newthreads = ""
-    else:
-        print()
-        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
-        mympcs()
+    newthreads = ""
+    if newtype != "one-piece":
+        mpcthreadsmenu()
+        option = input("Threads: ")
+        if option == "1":
+            newthreads = "standard"
+        elif option == "2":
+            newthreads = "metric"
+        elif option == "3":
+            newthreads = "other"
+        elif option == "":
+            newthreads = ""
+        else:
+            print()
+            input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
+            mympcs()
     mpcfinishmenu()
     option = input("Finish: ")
     if option == "1":
