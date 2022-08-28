@@ -65,7 +65,7 @@ def mainmenu():
         print()
         print("You are not currently logged in...")
         print(colored(banner, 'yellow'))
-        print("[1] My Mouthpieces")
+        print("[1] My mouthpieces")
         print("-----------------------")
         print(colored("[6] ", 'green') + ("Log in"))
         print("[7] Log out")
@@ -77,7 +77,7 @@ def mainmenu():
         print()
         print("You are logged in as " + logemail)
         print(colored(banner, 'yellow'))
-        print(colored("[1] ", 'green') + ("My Mouthpieces"))
+        print(colored("[1] ", 'green') + ("My mouthpieces"))
         print("-----------------------")
         print("[6] Log in")
         print(colored("[7] ", 'green') + ("Log out"))
@@ -110,38 +110,68 @@ def mympcsmenu():
 # Menu for selecting a mouthpiece type
 def mpctypemenu():
     print()
-    print("one-piece")
-    print("two-piece")
-    print("cup")
-    print("rim")
+    print(colored("[1] ", 'green') + ("one-piece"))
+    print(colored("[2] ", 'green') + ("two-piece"))
+    print(colored("[3] ", 'green') + ("cup"))
+    print(colored("[4] ", 'green') + ("rim"))
     print()
 
 
 # Menu for selecting a mouthpiece finish
 def mpcfinishmenu():
     print()
-    print("silver plated")
-    print("gold plated")
-    print("brass")
-    print("nickel")
-    print("stainless")
-    print("bronze")
-    print("plastic")
+    print(colored("[1] ", 'green') + ("silver plated"))
+    print(colored("[2] ", 'green') + ("gold plated"))
+    print(colored("[3] ", 'green') + ("brass"))
+    print(colored("[4] ", 'green') + ("nickel"))
+    print(colored("[5] ", 'green') + ("stainless"))
+    print(colored("[6] ", 'green') + ("bronze"))
+    print(colored("[7] ", 'green') + ("plastic"))
     print()
 
 
 # Add mouthpiece process
 def addmpc():
     print()
-    newmfr = str(input("Make: "))
+    newmake = str(input("Make: "))
     print()
     newmodel = str(input("Model: "))
     mpctypemenu()
-    newtype = str(input("Mouthpiece type: "))
+    option = int(input("Mouthpiece type: "))
+    if option == 1:
+        newtype = "one-piece"
+    elif option == 2:
+        newtype = "two-piece"
+    elif option == 3:
+        newtype = "cup"
+    elif option == 4:
+        newtype = "rim"
+    else:
+        print()
+        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
+        mympcs()
     mpcfinishmenu()
-    newfinish = str(input("Finish: "))
+    option = int(input("Finish: "))
+    if option == 1:
+        newfinish = "silver plated"
+    elif option == 2:
+        newfinish = "gold plated"
+    elif option == 3:
+        newfinish = "brass"
+    elif option == 4:
+        newfinish = "nickel"
+    elif option == 5:
+        newfinish = "stainless"
+    elif option == 6:
+        newfinish = "bronze"
+    elif option == 7:
+        newfinish = "plastic"
+    else:
+        print()
+        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
+        mympcs()
     print()
-    print(("Make: ") + colored(newmfr, 'green'))
+    print(("Make: ") + colored(newmake, 'green'))
     print(("Model: ") + colored(newmodel, 'green'))
     print(("Type: ") + colored(newtype, 'green'))
     print(("Finish: ") + colored(newfinish, 'green'))
@@ -150,7 +180,7 @@ def addmpc():
     conf = input("Send to Knack? " + colored("[y] [n]: ", 'green'))
     if conf == "y":
         api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
-        mouthpiece = {"field_17": newmfr, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
+        mouthpiece = {"field_17": newmake, "field_24": newtype, "field_16": newmodel, "field_26": newfinish}
         headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
         response = requests.post(api_url, data=json.dumps(mouthpiece), headers=headers)
         print()
@@ -182,7 +212,7 @@ def mympcs():
             mainmenu()
         else:
             print()
-            input("Invalid option selected. Press Enter to continue...")
+            input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
             mympcs()
 
 
@@ -301,7 +331,7 @@ while option != 0:
         addusr()
     else:
         print()
-        input("Invalid option selected. Press Enter to continue...")
+        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
 
     print()
     mainmenu()
