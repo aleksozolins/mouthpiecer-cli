@@ -238,9 +238,9 @@ def listmpcs():
     pd.set_option('display.max_rows', None)
     df = pd.json_normalize(jresponse['records'])
     df['index1'] = df.index
-    df.drop(df.columns[[2, 4, 6, 8]], axis=1, inplace=True)
-    df.columns = ['id', 'Make', 'Model', 'Type', 'Finish', 'Index']
-    df = df.reindex(columns=['Index', 'Make', 'Model', 'Type', 'Finish', 'id'])
+    df.drop(df.columns[[2, 4, 6, 8, 10, 11, 12]], axis=1, inplace=True)
+    df.columns = ['id', 'Make', 'Model', 'Type', 'Threads', 'Finish', 'Index']
+    df = df.reindex(columns=['Index', 'Make', 'Model', 'Type', 'Threads', 'Finish', 'id'])
     if mpcselect == 0:
         df2 = df.to_string(index=False)
         print(df2)
