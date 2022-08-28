@@ -48,6 +48,17 @@ def login():
             input(colored("Invalid credentials. ", 'red') + "Press Enter to continue...")
 
 
+# Login process for new users
+def loginnewusr():
+    global token
+    api_url = "https://api.knack.com/v1/applications/60241522a16be4001b611249/session"
+    creds = {"email": newusremail, "password": newusrpasswd1}
+    headers = {"content-type":"application/json", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
+    response = requests.post(api_url, data=json.dumps(creds), headers=headers)
+    jresponse = response.json()
+    token = jresponse['session']['user']['token']
+
+
 # Logout process
 def logout():
     global token
@@ -186,9 +197,10 @@ def addmpc():
         print()
         if response.status_code == 200:
             input("Success! Press Enter to continue...")
+            mympcs()
         else:
-            input("Error! There was a problem with your request. Press Enter to continue...")
-        mympcs()
+            input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
+            mympcs()
     else:
         mympcs()
 
@@ -241,30 +253,35 @@ def listmpcs():
 
 # Delete mouthpiece process
 def delmpc():
-    global mpcselect
-    mpcselect = 1
-    mympcsmenu()
-    listmpcs()
-    print("Make a menu selection: 2")
-    print()
-    selection = int(input("Select a mouthpiece by Index to delete: "))
-    print()
-    conf = input(colored("Are you sure you want to delete this mouthpiece? ", 'red') + colored("[y] [n]: ", 'green'))
-    if conf == "y":
-        delid = df.iloc[selection]['id']
-        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
-        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
-        response = requests.delete(api_url, headers=headers)
+    if len(df.index) == 1:
         print()
-        if response.status_code == 200:
-            input("Success! Press Enter to continue...")
-        else:
-            input("Error! There was a problem with your request. Press Enter to continue...")
-        mpcselect = 0
+        input(colored("Add another mouthpiece to delete. ", 'red') + ("You need at least one in place. Press Enter to continue..."))
         mympcs()
     else:
-        mpcselect = 0
-        mympcs()
+        global mpcselect
+        mpcselect = 1
+        mympcsmenu()
+        listmpcs()
+        print("Make a menu selection: 2")
+        print()
+        selection = int(input("Select a mouthpiece by Index to delete: "))
+        print()
+        conf = input(colored("Are you sure you want to delete this mouthpiece? ", 'red') + colored("[y] [n]: ", 'green'))
+        if conf == "y":
+            delid = df.iloc[selection]['id']
+            api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
+            headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
+            response = requests.delete(api_url, headers=headers)
+            print()
+            if response.status_code == 200:
+                input("Success! Press Enter to continue...")
+            else:
+                input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
+                mpcselect = 0
+                mympcs()
+        else:
+            mpcselect = 0
+            mympcs()
 
 
 # Edit mouthpiece process
@@ -277,6 +294,9 @@ def editmpc():
 # Add user process
 # NOTE: Adding the connected Mouthpiecer in field_40 does not yet work. We may need to retrieve the ID of the new account and then add that value with an additional call.
 def addusr():
+    global newusremail
+    global newusrpasswd1
+    global logemail
     if token != "":
         input("Please log out before adding a user. Press Enter...")
     else:
@@ -290,15 +310,25 @@ def addusr():
         newusrpasswd1 = getpass.getpass("Password: ")
         newusrpasswd2 = getpass.getpass("Confirm: ")
         if newusrpasswd1 != newusrpasswd2:
-            print("Passwords do not match -- Process aborted...")
+            print()
+            input(colored("Passwords do not match. ", 'red') + ("Process aborted. Press Enter to continue..."))
         else:
+            logemail = newusremail
+            print()
             input("Press Enter to send to Knack...")
             api_url = "https://api.knack.com/v1/objects/object_1/records"
             newusr = {"field_1": {"first": newusrfname, "last": newusrlname}, "field_2": newusremail, "field_3": newusrpasswd1, "field_4": "active", "field_5": "Mouthpiecer"}
             headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"82d8170b-0661-4462-8dbb-3a589abdfc39"}
             response = requests.post(api_url, data=json.dumps(newusr), headers=headers)
-            print(response.json())
-            print(response.status_code)
+            if response.status_code == 200:
+                loginnewusr()
+                print()
+                input("Success! You have been added and logged in. Let's add your first mouthpiece. Press Enter to continue...")
+                addmpc()
+            else:
+                print()
+                input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
+                mainmenu()
 
 
 # Retrieve user process
@@ -340,3 +370,4 @@ while option != 0:
 bannerfile.close()
 print()
 print("You've exited to shell")
+print()

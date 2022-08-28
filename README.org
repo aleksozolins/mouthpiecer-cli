@@ -21,21 +21,24 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Todos
 
+- [ ] Add all fields to My Mouthpieces view
+- [ ] Add conditional threading / notes input for adding mouthpiece and viewing
+- [ ] Error when a non-integer value is entered for an integer menu
 - [ ] Move project to org using babel
-- [ ] Problem listing mouthpieces when there are none
+- [ ] Assign connection from account to mouthpiecer when adding new user
+- [ ] Prevent confirmation on mouthpiece add when user is new
+- [ ] Pagination
+- [ ] View mouthpiece details option
+- [ ] Edit mouthpiece operation
+- [X] Problem listing mouthpieces when there are none
   reference [[https://stackoverflow.com/questions/15943769/how-do-i-get-the-row-count-of-a-pandas-dataframe][this]]
 - [X] Add confirm prompts to operations
-- [ ] Edit mouthpiece operation
-- [ ] Pagination
-- [ ] Normalize spacing of all operations
+- [X] Normalize spacing of all operations
 - [X] Spruce up the interface with more color
-- [ ] Add all fields to My Mouthpieces view
-- [ ] Conditional input for thread type etc.
 - [X] Colored output
 - [X] View based calls (as opposed to object based calls) once logged in
 - [X] Error handling
 - [X] Format incoming JSON into table (list mouthpieces)
-- [ ] Assign connection to mouthpiecer when adding mouthpiece
 - [X] Add log out option
 - [X] Do not allow mouthpiece operation if not logged in
 - [X] Logged in indicator (you are logged in as...)
