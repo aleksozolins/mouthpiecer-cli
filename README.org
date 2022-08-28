@@ -23,6 +23,7 @@ For now, any dependencies have to be install manually with =pip=.
 
 - [ ] Move project to org using babel
 - [ ] Problem listing mouthpieces when there are none
+  reference [[https://stackoverflow.com/questions/15943769/how-do-i-get-the-row-count-of-a-pandas-dataframe][this]]
 - [X] Add confirm prompts to operations
 - [ ] Edit mouthpiece operation
 - [ ] Pagination
