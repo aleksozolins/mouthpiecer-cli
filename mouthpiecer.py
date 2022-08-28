@@ -154,50 +154,52 @@ def mpcfinishmenu():
 # Add mouthpiece process
 def addmpc():
     print()
-    newmake = str(input("Make: "))
+    newmake = input("Make: ")
     print()
-    newmodel = str(input("Model: "))
+    newmodel = input("Model: ")
     mpctypemenu()
-    option = int(input("Mouthpiece type: "))
-    if option == 1:
+    option = input("Mouthpiece type: ")
+    if option == "1":
         newtype = "one-piece"
-    elif option == 2:
+    elif option == "2":
         newtype = "two-piece"
-    elif option == 3:
+    elif option == "3":
         newtype = "cup"
-    elif option == 4:
+    elif option == "4":
         newtype = "rim"
     else:
         print()
         input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
         mympcs()
     mpcthreadsmenu()
-    option = int(input("Threads: "))
-    if option == 1:
+    option = input("Threads: ")
+    if option == "1":
         newthreads = "standard"
-    elif option == 2:
+    elif option == "2":
         newthreads = "metric"
-    elif option == 3:
+    elif option == "3":
         newthreads = "other"
+    elif option == "":
+        newthreads = ""
     else:
         print()
         input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
         mympcs()
     mpcfinishmenu()
-    option = int(input("Finish: "))
-    if option == 1:
+    option = input("Finish: ")
+    if option == "1":
         newfinish = "silver plated"
-    elif option == 2:
+    elif option == "2":
         newfinish = "gold plated"
-    elif option == 3:
+    elif option == "3":
         newfinish = "brass"
-    elif option == 4:
+    elif option == "4":
         newfinish = "nickel"
-    elif option == 5:
+    elif option == "5":
         newfinish = "stainless"
-    elif option == 6:
+    elif option == "6":
         newfinish = "bronze"
-    elif option == 7:
+    elif option == "7":
         newfinish = "plastic"
     else:
         print()
@@ -236,14 +238,14 @@ def mympcs():
     else:
         mympcsmenu()
         listmpcs()
-        selection = int(input("Make a menu selection: "))
-        if selection == 1:
+        selection = input("Make a menu selection: ")
+        if selection == "1":
             addmpc()
-        elif selection == 2:
+        elif selection == "2":
             delmpc()
-        elif selection == 3:
+        elif selection == "3":
             editmpc()
-        elif selection == 0:
+        elif selection == "0":
             mainmenu()
         else:
             print()
@@ -287,11 +289,11 @@ def delmpc():
         listmpcs()
         print("Make a menu selection: 2")
         print()
-        selection = int(input("Select a mouthpiece by Index to delete: "))
+        selection = input("Select a mouthpiece by Index to delete: ")
         print()
         conf = input(colored("Are you sure you want to delete this mouthpiece? ", 'red') + colored("[y] [n]: ", 'green'))
         if conf == "y":
-            delid = df.iloc[selection]['id']
+            delid = df.iloc[int(selection)]['id']
             api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
             headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
             response = requests.delete(api_url, headers=headers)
@@ -369,19 +371,19 @@ def rusr():
 
 # Here's where the program runs
 mainmenu()
-option = int(input("Enter your choice: "))
+option = input("Enter your choice: ")
 
-while option != 0:
-    if option == 1:
+while option != "0":
+    if option == "1":
         print()
         mympcs()
-    elif option == 6:
+    elif option == "6":
         print()
         login()
-    elif option == 7:
+    elif option == "7":
         print()
         logout()
-    elif option == 8:
+    elif option == "8":
         print()
         addusr()
     else:
@@ -390,7 +392,7 @@ while option != 0:
 
     print()
     mainmenu()
-    option = int(input("Enter your choice: "))
+    option = input("Enter your choice: ")
 
 bannerfile.close()
 print()

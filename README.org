@@ -19,18 +19,23 @@ For now, any dependencies have to be install manually with =pip=.
 - [[https://pandas.pydata.org/][pandas - Python Data Analisys Library]]
 - termcolor
 
+* Known issues
+
+- When selecting a mouthpiece to delete, if an integer is not entered, the program will terminate with an error.
+- While adding a mouthpiece, if you enter an invalid menu selection for type, threads, or finish, and then press "0" at the "My mouthpieces" menu, something strange happens.
+
 * Todos
 
-- [X] Add thread field to My Mouthpieces view
 - [ ] Add conditional threading input for adding mouthpiece
 - [ ] Increase spacing between dataframe columns
-- [ ] Error when a non-integer value is entered for an integer menu
 - [ ] Move project to org using babel
 - [ ] Assign connection from account to mouthpiecer when adding new user
 - [ ] Prevent confirmation on mouthpiece add when user is new
 - [ ] Pagination
 - [ ] View mouthpiece details option
 - [ ] Edit mouthpiece operation
+- [X] Error when a non-integer value is entered for an integer menu
+- [X] Add thread field to My Mouthpieces view
 - [X] Problem listing mouthpieces when there are none
   reference [[https://stackoverflow.com/questions/15943769/how-do-i-get-the-row-count-of-a-pandas-dataframe][this]]
 - [X] Add confirm prompts to operations
