@@ -259,8 +259,8 @@ def mympcs():
         while True:
             selection = input("Make a menu selection: ")
             try:
-                option = (int(option))
-                if conf not in (1, 2, 3, 0):
+                selection = (int(selection))
+                if selection not in (1, 2, 3, 0):
                     raise ValueError
             except:
                 print(colored("Invalid Option", 'red'))
