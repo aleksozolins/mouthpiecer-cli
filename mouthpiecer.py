@@ -13,16 +13,6 @@ banner = bannerfile.read()
 mpcselect = 0
 
 
-# Uesful code
-# 1
-# selection = int(input("Select a mouthpiece by number: "))
-# dfs = df.iloc[selection]['id']
-# print(dfs)
-# input("Press Enter to continue...")
-
-# 2
-# print(response.status_code)
-
 # Login process
 def login():
     global token
@@ -266,19 +256,25 @@ def mympcs():
     else:
         mympcsmenu()
         listmpcs()
-        selection = input("Make a menu selection: ")
-        if selection == "1":
+        while True:
+            selection = input("Make a menu selection: ")
+            try:
+                option = (int(option))
+                if conf not in (1, 2, 3, 0):
+                    raise ValueError
+            except:
+                print(colored("Invalid Option", 'red'))
+                print()
+                continue
+            break
+        if selection == 1:
             addmpc()
-        elif selection == "2":
+        elif selection == 2:
             delmpc()
-        elif selection == "3":
+        elif selection == 3:
             editmpc()
-        elif selection == "0":
+        elif selection == 0:
             mainmenu()
-        else:
-            print()
-            input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
-            mympcs()
 
 
 # List mouthpieces process
