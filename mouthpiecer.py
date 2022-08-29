@@ -76,7 +76,7 @@ def mainmenu():
         print()
     else:
         print()
-        print("You are logged in as " + logemail)
+        print("You are logged in as " + colored(logemail, 'blue'))
         print(colored(banner, 'yellow'))
         print(colored("[1] ", 'green') + ("My mouthpieces"))
         print("-----------------------")
@@ -93,9 +93,9 @@ def mympcsmenu():
     global mpcselect
     os.system('clear')
     print()
-    print("You are logged in as " + logemail)
+    print("You are logged in as " + colored(logemail, 'blue'))
     print(colored(banner, 'yellow'))
-    print("--- Mouthpieces for " + logemail + " ---")
+    print("--- Mouthpieces for " + colored(logemail, 'blue') + " ---")
     print()
     if mpcselect == 0:
         print(colored("[1] ", 'green') + ("Add mouthpiece               ") + (colored("[3] ", 'green') + ("Edit mouthpiece")))
@@ -215,6 +215,7 @@ def addmpc():
     elif option == 7:
         newfinish = "plastic"
     print()
+    print("------------------------")
     print(("Make: ") + colored(newmake, 'green'))
     print(("Model: ") + colored(newmodel, 'green'))
     print(("Type: ") + colored(newtype, 'green'))
