@@ -158,23 +158,38 @@ def addmpc():
     print()
     newmodel = input("Model: ")
     mpctypemenu()
-    option = input("Mouthpiece type: ")
-    if option == "1":
+    while True:
+        option = input("Mouthpiece type: ")
+        try:
+            option = (int(option))
+            if option not in (1, 2, 3, 4):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    if option == 1:
         newtype = "one-piece"
-    elif option == "2":
+    elif option == 2:
         newtype = "two-piece"
-    elif option == "3":
+    elif option == 3:
         newtype = "cup"
-    elif option == "4":
+    elif option == 4:
         newtype = "rim"
-    else:
-        print()
-        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
-        mympcs()
     newthreads = ""
     if newtype != "one-piece":
         mpcthreadsmenu()
-        option = input("Threads: ")
+        while True:
+            option = input("Threads: ")
+            try:
+                if option not in ("1", "2", "3", ""):
+                    raise ValueError
+            except:
+                print(colored("Invalid Option", 'red'))
+                print()
+                continue
+            break
         if option == "1":
             newthreads = "standard"
         elif option == "2":
@@ -183,30 +198,32 @@ def addmpc():
             newthreads = "other"
         elif option == "":
             newthreads = ""
-        else:
-            print()
-            input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
-            mympcs()
     mpcfinishmenu()
-    option = input("Finish: ")
-    if option == "1":
+    while True:
+        option = input("Finish: ")
+        try:
+            option = (int(option))
+            if option not in (1, 2, 3, 4, 5, 6, 7):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    if option == 1:
         newfinish = "silver plated"
-    elif option == "2":
+    elif option == 2:
         newfinish = "gold plated"
-    elif option == "3":
+    elif option == 3:
         newfinish = "brass"
-    elif option == "4":
+    elif option == 4:
         newfinish = "nickel"
-    elif option == "5":
+    elif option == 5:
         newfinish = "stainless"
-    elif option == "6":
+    elif option == 6:
         newfinish = "bronze"
-    elif option == "7":
+    elif option == 7:
         newfinish = "plastic"
-    else:
-        print()
-        input(colored("Invalid option selected. ", 'red') + ("Press Enter to continue..."))
-        mympcs()
     print()
     print(("Make: ") + colored(newmake, 'green'))
     print(("Model: ") + colored(newmodel, 'green'))
@@ -215,7 +232,16 @@ def addmpc():
     print(("Finish: ") + colored(newfinish, 'green'))
     print("------------------------")
     print()
-    conf = input("Send to Knack? " + colored("[y] [n]: ", 'green'))
+    while True:
+        conf = input("Send to Knack? " + colored("[y] [n]: ", 'green'))
+        try:
+            if conf not in ("y", "n"):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
     if conf == "y":
         api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records"
         mouthpiece = {"field_17": newmake, "field_24": newtype, "field_16": newmodel, "field_25": newthreads, "field_26": newfinish}
