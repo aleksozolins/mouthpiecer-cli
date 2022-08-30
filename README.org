@@ -26,14 +26,15 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Todos
 
-- [ ] Edit mouthpiece operation
 - [ ] Increase spacing between dataframe columns
+- [ ] Prefill inputs during edit operation
 - [ ] Move project to org using babel
 - [ ] Assign connection from account to mouthpiecer when adding new user
 - [ ] Prevent confirmation on mouthpiece add when user is new
 - [ ] Pagination
 - [ ] Add note to mouthpiece
 - [ ] View mouthpiece details option with note
+- [X] Edit mouthpiece operation
 - [X] Add conditional threading input for adding mouthpiece
 - [X] Error when a non-integer value is entered for an integer menu
 - [X] Add thread field to My Mouthpieces view

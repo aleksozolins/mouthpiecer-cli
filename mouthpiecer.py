@@ -149,7 +149,7 @@ def addmpc():
     newmodel = input("Model: ")
     mpctypemenu()
     while True:
-        option = input("Mouthpiece type: ")
+        option = input("Type: ")
         try:
             option = (int(option))
             if option not in (1, 2, 3, 4):
@@ -357,10 +357,136 @@ def delmpc():
 
 # Edit mouthpiece process
 def editmpc():
+    global mpcselect
+    mpcselect = 1
+    mympcsmenu()
+    listmpcs()
+    print("Make a menu selection: 3")
     print()
-    input("Not yet! Press Enter to continue...")
-    mympcs()
-
+    while True:
+        selection = input("Select a mouthpiece by Index to edit: ")
+        try:
+            selection = (int(selection))
+            if selection not in (range(0, len(df.index))):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    print()
+    newmake = input(("Make (" + df.iloc[selection]['Make'] + "): "))
+    print()
+    newmodel = input(("Model (" + df.iloc[selection]['Model'] + "): "))
+    mpctypemenu()
+    while True:
+        option = input(("Type (" + df.iloc[selection]['Type'] + "): "))
+        try:
+            option = (int(option))
+            if option not in (1, 2, 3, 4):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    if option == 1:
+        newtype = "one-piece"
+    elif option == 2:
+        newtype = "two-piece"
+    elif option == 3:
+        newtype = "cup"
+    elif option == 4:
+        newtype = "rim"
+    newthreads = ""
+    if newtype != "one-piece":
+        mpcthreadsmenu()
+        while True:
+            option = input(("Threads (" + df.iloc[selection]['Threads'] + "): "))
+            try:
+                if option not in ("1", "2", "3", ""):
+                    raise ValueError
+            except:
+                print(colored("Invalid Option", 'red'))
+                print()
+                continue
+            break
+        if option == "1":
+            newthreads = "standard"
+        elif option == "2":
+            newthreads = "metric"
+        elif option == "3":
+            newthreads = "other"
+        elif option == "":
+            newthreads = ""
+    mpcfinishmenu()
+    while True:
+        option = input(("Finish (" + df.iloc[selection]['Finish'] + "): "))
+        try:
+            option = (int(option))
+            if option not in (1, 2, 3, 4, 5, 6, 7):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    if option == 1:
+        newfinish = "silver plated"
+    elif option == 2:
+        newfinish = "gold plated"
+    elif option == 3:
+        newfinish = "brass"
+    elif option == 4:
+        newfinish = "nickel"
+    elif option == 5:
+        newfinish = "stainless"
+    elif option == 6:
+        newfinish = "bronze"
+    elif option == 7:
+        newfinish = "plastic"
+    print()
+    print("OLD---------------------")
+    print(("Make: ") + colored(df.iloc[selection]['Make'], 'red'))
+    print(("Model: ") + colored(df.iloc[selection]['Model'], 'red'))
+    print(("Type: ") + colored(df.iloc[selection]['Type'], 'red'))
+    print(("Threads: ") + colored(df.iloc[selection]['Threads'], 'red'))
+    print(("Finish: ") + colored(df.iloc[selection]['Finish'], 'red'))
+    print("---------------------OLD")
+    print()
+    print("NEW---------------------")
+    print(("Make: ") + colored(newmake, 'green'))
+    print(("Model: ") + colored(newmodel, 'green'))
+    print(("Type: ") + colored(newtype, 'green'))
+    print(("Threads: ") + colored(newthreads, 'green'))
+    print(("Finish: ") + colored(newfinish, 'green'))
+    print("---------------------NEW")
+    print()
+    while True:
+        conf = input("Save changes? " + colored("[y] [n]: ", 'green'))
+        try:
+            if conf not in ("y", "n"):
+                raise ValueError
+        except:
+            print(colored("Invalid Option", 'red'))
+            print()
+            continue
+        break
+    if conf == "y":
+        editid = df.iloc[selection]['id']
+        api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + editid
+        mouthpiece = {"field_17": newmake, "field_24": newtype, "field_16": newmodel, "field_25": newthreads, "field_26": newfinish}
+        headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
+        response = requests.put(api_url, data=json.dumps(mouthpiece), headers=headers)
+        print()
+        if response.status_code == 200:
+            input("Success! Press Enter to continue...")
+            mympcs()
+        else:
+            input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
+            mympcs()
+    else:
+        mympcs()
 
 # Add user process
 # NOTE: Adding the connected Mouthpiecer in field_40 does not yet work. We may need to retrieve the ID of the new account and then add that value with an additional call.
