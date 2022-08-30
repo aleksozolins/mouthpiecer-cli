@@ -246,6 +246,7 @@ def addmpc():
             input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
             mympcs()
     else:
+        mpcselect = 0
         mympcs()
 
 
@@ -481,11 +482,14 @@ def editmpc():
         print()
         if response.status_code == 200:
             input("Success! Press Enter to continue...")
+            mpcselect = 0
             mympcs()
         else:
             input(colored("Error! There was a problem with your request. ", 'red') + ("Press Enter to continue..."))
+            mpcselect = 0
             mympcs()
     else:
+        mpcselect = 0
         mympcs()
 
 # Add user process
