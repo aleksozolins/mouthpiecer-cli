@@ -16,7 +16,7 @@ Ultimately, the cli should exactly mirror the feature-set of the web front end.
 
 - [X] macOS
 - [X] Linux
-- [ ] Windown (not currently supported)
+- [ ] Windows (not currently supported)
 
 * Dependencies
 
