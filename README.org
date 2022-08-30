@@ -12,6 +12,12 @@ The Mouthpiecer Knack front end can be found here: [[https://aleksozolins.knack.
 
 Ultimately, the cli should exactly mirror the feature-set of the web front end.
 
+* Compatibility
+
+- [X] macOS
+- [X] Linux
+- [ ] Windown (not currently supported)
+
 * Dependencies
 
 For now, any dependencies have to be install manually with =pip=.
@@ -27,6 +33,7 @@ For now, any dependencies have to be install manually with =pip=.
 
 * Todos
 
+- [ ] Installation shell script
 - [ ] Increase spacing between dataframe columns
 - [ ] Change "Make" selection to choice by int
 - [ ] Prefill inputs during edit operation
