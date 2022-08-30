@@ -35,6 +35,7 @@ For now, any dependencies have to be installed manually with =pip=.
 
 - [ ] Installation shell script
 - [ ] Run mouthpiecer with shebang
+- [ ] Colorize all successes to blue
 - [ ] Increase spacing between dataframe columns
 - [ ] Change "Make" selection to choice by int
 - [ ] Prefill inputs during edit operation
