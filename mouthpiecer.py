@@ -314,11 +314,30 @@ def delmpc():
         listmpcs()
         print("Make a menu selection: 2")
         print()
-        selection = input("Select a mouthpiece by Index to delete: ")
+        while True:
+            selection = input("Select a mouthpiece by Index to delete: ")
+            try:
+                selection = (int(selection))
+                if selection not in (range(0, len(df.index))):
+                    raise ValueError
+            except:
+                print(colored("Invalid Option", 'red'))
+                print()
+                continue
+            break
         print()
-        conf = input(colored("Are you sure you want to delete this mouthpiece? ", 'red') + colored("[y] [n]: ", 'green'))
+        while True:
+            conf = input(colored("Are you sure you want to delete this ", 'red') + (df.iloc[selection]['Make']) + (" ") + (df.iloc[selection]['Model']) + (" ") + colored("[y] [n]: ", 'green'))
+            try:
+                if conf not in ("y", "n"):
+                    raise ValueError
+            except:
+                print(colored("Invalid Option", 'red'))
+                print()
+                continue
+            break
         if conf == "y":
-            delid = df.iloc[int(selection)]['id']
+            delid = df.iloc[selection]['id']
             api_url = "https://api.knack.com/v1/pages/scene_18/views/view_18/records/" + delid
             headers = {"content-type":"application/json", "X-Knack-Application-Id":"60241522a16be4001b611249", "X-Knack-REST-API-KEY":"knack", "Authorization":token}
             response = requests.delete(api_url, headers=headers)
