@@ -18,10 +18,29 @@ Ultimately, the cli should exactly mirror the feature-set of the web front end.
 - [X] Linux
 - [ ] Windows (not currently supported)
 
+* Installation Instructions (venv)
+
+From the terminal:
+
+1. ~git clone https://github.com/aleksozolins/mouthpiecer-cli.git~
+2. ~cd mouthpiecer-cli~
+3. ~python3 -m venv .venv~
+4. ~source .venv/bin/activate~
+5. ~pip3 install -r requirements.txt~
+
+To run the program:
+
+~python3 mouthpiecer-cli.py~
+
+To exit the virtual environment after quitting
+
+~deactivate~
+
 * Dependencies
 
 For now, any dependencies have to be installed manually with =pip=.
 
+- requests
 - [[https://pandas.pydata.org/][pandas - Python Data Analisys Library]]
 - termcolor
 
